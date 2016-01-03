@@ -41,4 +41,26 @@ import java.awt.Robot;
             e.printStackTrace();
         }
     }
+
+
+    void Press(int keyKode,int keyKode2,int keyKode3 ,int delay)
+    {
+        try
+        {
+            Robot robot=new Robot();
+            robot.keyPress(keyKode);
+            robot.keyPress(keyKode2);
+            robot.keyPress(keyKode3);
+            robot.delay(delay);
+            System.out.println("Pressed");
+            robot.keyRelease(keyKode);
+            robot.keyRelease(keyKode2);
+            robot.keyRelease(keyKode3);
+
+        }
+        catch(AWTException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }
