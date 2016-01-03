@@ -55,14 +55,14 @@ public class ActionsFromArdruino {
                 case "31 30 33 33 35 36 31 30 37 39 0D 0A"://2
                     keyPresser.Press(16,120,50);//Shift+F9
                     break;
-                case "1635910171"://3
-
+                case "31 36 33 35 39 31 30 31 37 31 0D 0A"://3
+                    keyPresser.Press(17,16,84,50);//Ctrl+Shift+T Last 10 closet links
                     break;
-                case "2351064443"://4
-
+                case "32 33 35 31 30 36 34 34 34 33 0D 0A"://4
+                    keyPresser.Press(122,50);//F11
                     break;
-                case "1217346747"://5
-
+                case "31 32 31 37 33 34 36 37 34 37 0D 0A"://5
+                    keyPresser.Press(16,27,50);//Shift+Esc TaskManager
                     break;
                 case "71952287"://6
 
