@@ -8,23 +8,15 @@ import java.math.BigDecimal;
  */
 public class ActionsFromArdruino {
     void Actions(String IRcode) {
-        System.out.println("Recive:" + IRcode);
-
-            if("4001918335".equals(IRcode))
-            {
-                System.out.println("!!!!!!");
-            }
-
-
-
-
+        //System.out.println("Recive:" + IRcode);
+            KeyPresser keyPresser=new KeyPresser();
             switch (IRcode)//Get code from ardruino
             {
-                case "4001918335":
+                case "34 30 30 31 39 31 38 33 33 35 0D 0A":
                     //CH+
                     System.out.println("working");
                     break;
-                case "5316027"://CH
+                case "35 33 31 36 30 32 37 0D 0A"://CH
 
                     break;
                 case "3810010651"://CH-
@@ -36,8 +28,8 @@ public class ActionsFromArdruino {
                 case ("3622325019")://Next
 
                     break;
-                case "553536955"://Play/Pause
-
+                case "35 35 33 35 33 36 39 35 35 0D 0A"://Play/Pause
+                    keyPresser.Press(116,50);
                     break;
                 case "4034314555"://vol-
 
@@ -85,7 +77,7 @@ public class ActionsFromArdruino {
 
                     break;
                 default:
-                    System.out.println(IRcode);
+                    //System.out.println(IRcode);
             }
 
 

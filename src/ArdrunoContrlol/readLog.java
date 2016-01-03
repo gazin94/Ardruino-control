@@ -8,14 +8,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Scanner;
-
 /*Импорт классов библиотеки jssc*/
-import jssc.SerialPort;
-import jssc.SerialPortEvent;
-import jssc.SerialPortEventListener;
-import jssc.SerialPortException;
+import jssc.*;
 
- class readLog extends Frame
+class readLog extends Frame
  {
      public String IR;//Создаем подкласс Log_window класса Frame
     //public static String data;
@@ -35,14 +31,19 @@ import jssc.SerialPortException;
 		на кнопку*/
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
+                String[] ports= SerialPortList.getPortNames();
+                for (int i = 0; i <ports.length ; i++) {
+                    System.out.println(ports[i]);
+                }
 
                 System.out.print("Введите COM PORT(COMn): ");
                 Scanner SCN= new Scanner(System.in);//Сканирроание консоли
-                String COM= SCN.next();//Прием значениия
+                int COM= SCN.nextInt();//Прием значениия
+                String port="COM"+COM;
 
 
 
-                serialPort = new SerialPort(COM);/*Передаем в конструктор суперкласса имя
+                serialPort = new SerialPort(port);/*Передаем в конструктор суперкласса имя
 				порта с которым будем работать*/
                 try {
                     serialPort.openPort();/*Метод открытия порта*/
@@ -82,14 +83,15 @@ import jssc.SerialPortException;
     }
 
     private static class EventListener implements SerialPortEventListener  {
-        ActionsFromArdruino ActionsFromArdruino=new ActionsFromArdruino();
+
         /*Слушатель срабатывающий по появлению данных на COM-порте*/
         public void serialEvent(SerialPortEvent event) {
             if(event.isRXCHAR() && event.getEventValue() > 0){/*Если происходит событие установленной маски и количество байтов в буфере более 0*/
                 try {
-                    String data = serialPort.readString(event.getEventValue());/*Создаем строковую переменную  data, куда и сохраняем данные*/
+                    String data = serialPort.readHexString(event.getEventValue());/*Создаем строковую переменную  data, куда и сохраняем данные*/
                     myLabel.setAlignment(Label.CENTER);
                     myLabel.setText(data);
+                    ActionsFromArdruino ActionsFromArdruino=new ActionsFromArdruino();
                     ActionsFromArdruino.Actions(data);
                     //System.out.print(data);
 
