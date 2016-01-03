@@ -77,13 +77,11 @@ public class SerialNativeInterface {
                         libFile.delete();
                     }
                 } catch (Exception var12) {
-                    ;
                 }
 
                 try {
                     input.close();
                 } catch (Exception var11) {
-                    ;
                 }
             }
         }
@@ -182,7 +180,6 @@ public class SerialNativeInterface {
 
                             reader.close();
                         } catch (Exception var13) {
-                            ;
                         }
                     } else {
                         loadLib = "hf";

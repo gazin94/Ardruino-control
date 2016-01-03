@@ -144,21 +144,13 @@ public class SerialPort {
             if(!returnValue) {
                 throw new SerialPortException(this.portName, "setEventsMask()", "Can\'t set mask");
             } else {
-                if(mask > 0) {
-                    this.maskAssigned = true;
-                } else {
-                    this.maskAssigned = false;
-                }
+                this.maskAssigned = mask > 0;
 
                 return returnValue;
             }
         } else {
             this.linuxMask = mask;
-            if(mask > 0) {
-                this.maskAssigned = true;
-            } else {
-                this.maskAssigned = false;
-            }
+            this.maskAssigned = mask > 0;
 
             return true;
         }
@@ -297,7 +289,6 @@ public class SerialPort {
             try {
                 Thread.sleep(0L, 100);
             } catch (InterruptedException var8) {
-                ;
             }
         }
 
@@ -460,13 +451,11 @@ public class SerialPort {
             this.eventThread.setName("EventThread " + this.portName);
 
             try {
-                Method ex = this.eventListener.getClass().getMethod("errorOccurred", new Class[]{SerialPortException.class});
+                Method ex = this.eventListener.getClass().getMethod("errorOccurred", SerialPortException.class);
                 ex.setAccessible(true);
                 this.methodErrorOccurred = ex;
             } catch (SecurityException var5) {
-                ;
             } catch (NoSuchMethodException var6) {
-                ;
             }
 
             this.eventThread.start();
@@ -475,7 +464,7 @@ public class SerialPort {
     }
 
     private SerialPort.EventThread getNewEventThread() {
-        return (SerialPort.EventThread)(SerialNativeInterface.getOsType() != 0 && SerialNativeInterface.getOsType() != 2 && SerialNativeInterface.getOsType() != 3?new SerialPort.EventThread():new SerialPort.LinuxEventThread());
+        return SerialNativeInterface.getOsType() != 0 && SerialNativeInterface.getOsType() != 2 && SerialNativeInterface.getOsType() != 3?new EventThread():new LinuxEventThread();
     }
 
     public boolean removeEventListener() throws SerialPortException {
@@ -674,7 +663,6 @@ public class SerialPort {
                 try {
                     Thread.sleep(0L, 100);
                 } catch (Exception var9) {
-                    ;
                 }
             }
 

@@ -11,6 +11,8 @@ import java.util.Scanner;
 /*Импорт классов библиотеки jssc*/
 import jssc.*;
 
+import javax.swing.*;
+
 class readLog extends Frame
  {
      public String IR;//Создаем подкласс Log_window класса Frame
@@ -31,19 +33,27 @@ class readLog extends Frame
 		на кнопку*/
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
-                String[] ports= SerialPortList.getPortNames();
-                for (int i = 0; i <ports.length ; i++) {
-                    System.out.println(ports[i]);
-                }
+                String[] getedPortsArray= SerialPortList.getPortNames();
 
-                System.out.print("Введите COM PORT(COMn): ");
-                Scanner SCN= new Scanner(System.in);//Сканирроание консоли
-                int COM= SCN.nextInt();//Прием значениия
-                String port="COM"+COM;
+                JFrame frame = new JFrame("Input Dialog Example");
+                String deafultPort=(String)JOptionPane.showInputDialog(frame,
+                        "вберите порт",
+                        "Выбор порта",JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        getedPortsArray,
+                        getedPortsArray[0]);
+                //System.out.println(s);
+                //System.out.print("Введите номер  СОМ порта: ");
+                //Scanner SCN= new Scanner(System.in);//Сканирроание консоли
+                //int COM= SCN.nextInt();//Прием значениия
+                //String port="COM"+COM;
 
 
 
-                serialPort = new SerialPort(port);/*Передаем в конструктор суперкласса имя
+
+
+
+                serialPort = new SerialPort(deafultPort);/*Передаем в конструктор суперкласса имя
 				порта с которым будем работать*/
                 try {
                     serialPort.openPort();/*Метод открытия порта*/
