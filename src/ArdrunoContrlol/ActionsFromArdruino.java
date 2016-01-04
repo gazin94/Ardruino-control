@@ -41,7 +41,7 @@ public class ActionsFromArdruino {
                     keyPresser.Press(27,50);//Esc
                     break;
                 case "33 32 33 38 31 32 36 39 37 31 0D 0A"://0
-                    keyPresser.Press(17,87,50);//Cttl+W
+                    keyPresser.Press(17,87,50);//02.
                     break;
                 case "32 35 33 38 30 39 33 35 36 33 0D 0A"://+100
                 keyPresser.Press(17,16,9,50);//Ctrl+Shift+Tab
@@ -78,7 +78,36 @@ public class ActionsFromArdruino {
                     break;
                 default:
                     //System.out.println(IRcode);
+            }   //Ardruino code#include <Keyboard.h>
+        /*
+        #include <IRremote.h>
+
+
+        int RECV_PIN = 2;
+
+        IRrecv irrecv(RECV_PIN); //Создаем объект получения сигнала с определнного порта
+
+        decode_results results; //Переменная, хранящая результат
+
+        void setup()
+        {
+            Serial.begin(9600);
+            irrecv.enableIRIn(); // Начинаем прием
+            Keyboard.begin();
+        }
+
+        void loop() {
+            if (irrecv.decode(&results)) //При получении сигнала...
+            {
+                Serial.println(results.value); //…выводим его значение в последовательный порт
+                irrecv.resume(); // Получаем следующее значение
             }
+            switch(results.value)
+            {case 553536955:
+                Keyboard.write(198);
+                break;
+            }
+        } */
 
 
         }
